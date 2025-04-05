@@ -1,13 +1,24 @@
 import "./auth.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { loginService } from "../../services/authService";
+
+interface LoginFormData {
+  email: string;
+  password: string;
+}
 
 export const Login = () => {
-  const [loginFormData, setLoginFormData] = useState({
+  const [loginFormData, setLoginFormData] = useState<LoginFormData>({
     email: "",
     password: "",
   });
-  const [isPasswdVisible, setIsPasswdVisible] = useState(false);
+  const [isPasswdVisible, setIsPasswdVisible] = useState<boolean>(false);
+
+  const loginHandeler = async () => {
+    const loginResp = await loginService(loginFormData);
+    console.log("Login response", loginResp);
+  };
 
   return (
     <div className="login-container">
@@ -18,12 +29,14 @@ export const Login = () => {
         className="login-inputs"
         onSubmit={(e) => {
           e.preventDefault();
+          loginHandeler();
         }}
       >
         <input
           type="text"
           className="userid"
           placeholder="User ID"
+          value={loginFormData.email}
           onChange={(e) =>
             setLoginFormData({ ...loginFormData, email: e.target.value })
           }
@@ -32,7 +45,7 @@ export const Login = () => {
           <input
             type={isPasswdVisible ? "text" : "password"}
             name="passwd"
-            id=""
+            value={loginFormData.password}
             placeholder="Password"
             onChange={(e) =>
               setLoginFormData({ ...loginFormData, password: e.target.value })
@@ -62,7 +75,7 @@ export const Login = () => {
             })
           }
         >
-          Login with dummy creds
+          Populate dummy creds
         </button>
         <div className="login-footer">
           <div>
