@@ -1,19 +1,34 @@
 import "./auth.css";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { signupService } from "../../services/authService";
+
+interface SignupFormData {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 export const Signup = () => {
-  const [signupFormData, setSignupFormData] = useState({
-    firstName: "",
-    lastName: "",
+  const [signupFormData, setSignupFormData] = useState<SignupFormData>({
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
   const [isPasswdVisible, setIsPasswdVisible] = useState({
     passwd: false,
     cpasswd: false,
   });
+
+  const signupHandeler = async () => {
+    const loginResp = await signupService(signupFormData);
+    console.log("signup response", loginResp);
+  };
 
   return (
     <div className="login-container">
@@ -24,6 +39,7 @@ export const Signup = () => {
         className="login-inputs"
         onSubmit={(e) => {
           e.preventDefault();
+          signupHandeler();
         }}
       >
         <input
@@ -31,7 +47,7 @@ export const Signup = () => {
           className="first-name"
           placeholder="First Name"
           onChange={(e) =>
-            setSignupFormData({ ...signupFormData, firstName: e.target.value })
+            setSignupFormData({ ...signupFormData, firstname: e.target.value })
           }
         />
         <input
@@ -39,7 +55,7 @@ export const Signup = () => {
           className="last-name"
           placeholder="Last Name"
           onChange={(e) =>
-            setSignupFormData({ ...signupFormData, lastName: e.target.value })
+            setSignupFormData({ ...signupFormData, lastname: e.target.value })
           }
         />
         <input
