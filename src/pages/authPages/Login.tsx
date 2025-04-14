@@ -1,5 +1,5 @@
 import "./auth.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { loginService } from "../../services/authService";
 
@@ -9,6 +9,7 @@ interface LoginFormData {
 }
 
 export const Login = () => {
+  const navigate = useNavigate();
   const [loginFormData, setLoginFormData] = useState<LoginFormData>({
     email: "",
     password: "",
@@ -16,8 +17,15 @@ export const Login = () => {
   const [isPasswdVisible, setIsPasswdVisible] = useState<boolean>(false);
 
   const loginHandeler = async () => {
-    const loginResp = await loginService(loginFormData);
-    console.log("Login response", loginResp);
+    try {
+      const loginResp = await loginService(loginFormData);
+      console.log("Login response", loginResp);
+      navigate("/products");
+    } catch (err) {
+      console.error("Login failed", err);
+      // Erropage routinf here
+      // navigate("/errorpage", { state: { error: err } });
+    }
   };
 
   return (

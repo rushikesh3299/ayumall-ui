@@ -1,5 +1,5 @@
 import "./auth.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signupService } from "../../services/authService";
 
@@ -12,6 +12,7 @@ interface SignupFormData {
 }
 
 export const Signup = () => {
+  const navigate = useNavigate();
   const [signupFormData, setSignupFormData] = useState<SignupFormData>({
     firstname: "",
     lastname: "",
@@ -26,8 +27,15 @@ export const Signup = () => {
   });
 
   const signupHandeler = async () => {
-    const loginResp = await signupService(signupFormData);
-    console.log("signup response", loginResp);
+    try {
+      const loginResp = await signupService(signupFormData);
+      console.log("signup response", loginResp);
+      navigate("/products");
+    } catch (err) {
+      console.error("signup failed", err);
+      // Erropage routinf here
+      // navigate("/errorpage", { state: { error: err } });
+    }
   };
 
   return (
