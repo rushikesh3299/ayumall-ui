@@ -23,8 +23,7 @@ export const Login = () => {
       navigate("/products");
     } catch (err) {
       console.error("Login failed", err);
-      // Erropage routinf here
-      // navigate("/errorpage", { state: { error: err } });
+      // error toast
     }
   };
 

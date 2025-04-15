@@ -33,8 +33,7 @@ export const Signup = () => {
       navigate("/products");
     } catch (err) {
       console.error("signup failed", err);
-      // Erropage routinf here
-      // navigate("/errorpage", { state: { error: err } });
+      // Errop toast
     }
   };
 
