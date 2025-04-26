@@ -1,7 +1,9 @@
 import "./auth.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { loginService } from "../../services/authService";
+import { loginService } from "../../services";
+import { saveUserData } from "../../store";
+import { useDispatch } from "react-redux";
 
 interface LoginFormData {
   email: string;
@@ -10,6 +12,7 @@ interface LoginFormData {
 
 export const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [loginFormData, setLoginFormData] = useState<LoginFormData>({
     email: "",
     password: "",
@@ -20,6 +23,7 @@ export const Login = () => {
     try {
       const loginResp = await loginService(loginFormData);
       console.log("Login response", loginResp);
+      dispatch(saveUserData(loginResp.data));
       navigate("/products");
     } catch (err) {
       console.error("Login failed", err);
@@ -74,7 +78,7 @@ export const Login = () => {
         </button>
         <button
           className="login-btn dummy"
-          onClick={(e) =>
+          onClick={() =>
             setLoginFormData({
               ...loginFormData,
               email: "test@gmail.com",

@@ -18,7 +18,8 @@ const loginService = async (loginData: LoginData) => {
   try {
     const { data, status } = await axios.post(
       `${API_URL}/auth/login`,
-      loginData
+      loginData,
+      { withCredentials: true }
     );
     if (status === 200) return data;
   } catch (err) {
@@ -31,7 +32,8 @@ const signupService = async (signupData: SignupData) => {
   try {
     const { data, status } = await axios.post(
       `${API_URL}/auth/signup`,
-      signupData
+      signupData,
+      { withCredentials: true }
     );
     if (status === 200) return data;
   } catch (err) {
