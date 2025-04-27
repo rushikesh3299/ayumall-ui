@@ -14,6 +14,18 @@ interface SignupData {
   confirmPassword: string;
 }
 
+const logoutService = async () => {
+  try {
+    const { data, status } = await axios.post(`${API_URL}/auth/logout`, {
+      withCredentials: true,
+    });
+    if (status === 200) return data;
+  } catch (err) {
+    console.error("Login failed", err);
+    throw err;
+  }
+};
+
 const loginService = async (loginData: LoginData) => {
   try {
     const { data, status } = await axios.post(
@@ -42,4 +54,4 @@ const signupService = async (signupData: SignupData) => {
   }
 };
 
-export { loginService, signupService };
+export { logoutService, loginService, signupService };

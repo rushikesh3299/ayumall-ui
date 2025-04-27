@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Footer } from "./components/footer/Footer";
 import { Product, Login, Signup, Home, ErrorPage } from "./pages";
+import { Navbar } from "./components";
 
 const AppContent = () => {
   const location = useLocation();
@@ -9,6 +10,9 @@ const AppContent = () => {
 
   return (
     <>
+      {location.pathname !== "/login" && location.pathname !== "/signup" && (
+        <Navbar />
+      )}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product" element={<Product />} />

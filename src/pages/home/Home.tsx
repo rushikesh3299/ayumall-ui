@@ -13,7 +13,7 @@ export const Home = () => {
         <p className="banner-discount">
           Upto <span>10% Off</span> on all products
         </p>
-        <NavLink className="banner-shop-btn" to="/products">
+        <NavLink className="banner-shop-btn" to="/product">
           Shop Now
         </NavLink>
       </div>
@@ -26,7 +26,7 @@ export const Home = () => {
             className="featured-card"
             onClick={() => {
               //   productDispatch({ type: "CATEGORIZE", payload: "Avaleha" });
-              navigate("./products");
+              navigate("./product");
             }}
           >
             <div className="featured-card-title">Avaleha</div>
@@ -40,7 +40,7 @@ export const Home = () => {
             className="featured-card"
             onClick={() => {
               //   productDispatch({ type: "CATEGORIZE", payload: "Rasayana" });
-              navigate("./products");
+              navigate("./product");
             }}
           >
             <div className="featured-card-title">Rasayana</div>
@@ -54,7 +54,7 @@ export const Home = () => {
             className="featured-card"
             onClick={() => {
               //   productDispatch({ type: "CATEGORIZE", payload: "Churna" });
-              navigate("./products");
+              navigate("./product");
             }}
           >
             <div className="featured-card-title">Churna</div>
@@ -68,7 +68,7 @@ export const Home = () => {
             className="featured-card"
             onClick={() => {
               //   productDispatch({ type: "CATEGORIZE", payload: "Vati" });
-              navigate("./products");
+              navigate("./product");
             }}
           >
             <div className="featured-card-title">Vati</div>
@@ -90,7 +90,7 @@ export const Home = () => {
             alt="Dabur img..."
             onClick={() => {
               //   productDispatch({ type: "BRANDWISE", payload: "Dabar" });
-              navigate("./products");
+              navigate("./product");
             }}
           />
           <img
@@ -98,7 +98,7 @@ export const Home = () => {
             alt="Dhootpapeshwar img..."
             onClick={() => {
               //   productDispatch({ type: "BRANDWISE", payload: "Dhootpapeshwar" });
-              navigate("./products");
+              navigate("./product");
             }}
           />
           <img
@@ -106,7 +106,7 @@ export const Home = () => {
             alt="Santulan img..."
             onClick={() => {
               //   productDispatch({ type: "BRANDWISE", payload: "Santulan" });
-              navigate("./products");
+              navigate("./product");
             }}
           />
           <img
@@ -114,7 +114,7 @@ export const Home = () => {
             alt="Patanjali img..."
             onClick={() => {
               //   productDispatch({ type: "BRANDWISE", payload: "Patanjali" });
-              navigate("./products");
+              navigate("./product");
             }}
           />
         </div>

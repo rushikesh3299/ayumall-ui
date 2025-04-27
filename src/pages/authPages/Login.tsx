@@ -24,7 +24,7 @@ export const Login = () => {
       const loginResp = await loginService(loginFormData);
       console.log("Login response", loginResp);
       dispatch(saveUserData(loginResp.data));
-      navigate("/products");
+      navigate("/product");
     } catch (err) {
       console.error("Login failed", err);
       // error toast

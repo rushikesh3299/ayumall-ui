@@ -30,7 +30,7 @@ export const Signup = () => {
     try {
       const loginResp = await signupService(signupFormData);
       console.log("signup response", loginResp);
-      navigate("/products");
+      navigate("/product");
     } catch (err) {
       console.error("signup failed", err);
       // Errop toast
