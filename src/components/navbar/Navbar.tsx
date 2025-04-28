@@ -3,13 +3,12 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { logoutService } from "../../services";
-import { removeUserData } from "../../store";
+import { removeUserData, setShowFilterMobileNav } from "../../store";
 
 export const Navbar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [dispMobNav, setDispMobNav] = useState(false);
-  const [showFilterMobileNav, setShowFilterMobileNav] = useState(false);
   const userData = useSelector((state) => state.auth);
 
   const logoutHandler = async () => {
@@ -133,10 +132,10 @@ export const Navbar = () => {
           <div className="mobile-nav-menu">
             <div>Trending</div>
           </div>
-          {location.pathname === "/products" && (
+          {location.pathname === "/product" && (
             <div
               className="mobile-nav-menu"
-              onClick={() => setShowFilterMobileNav(true)}
+              onClick={() => dispatch(setShowFilterMobileNav(true))}
             >
               <div>Filter</div>
             </div>

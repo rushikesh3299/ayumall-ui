@@ -1,5 +1,7 @@
 // import { useProduct } from "../../context/index";
 import "./filter.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setShowFilterMobileNav } from "../../store";
 
 export const Filter = () => {
   //   const {
@@ -7,19 +9,23 @@ export const Filter = () => {
   //     productDispatch,
   //     showFilterMobileNav,
   //     setShowFilterMobileNav,
-  //   } = useProduct();
+  //   } = useProduct();s
+  const dispatch = useDispatch();
+  const showFilterMobileNav = useSelector(
+    (state) => state.utility.showFilterMobileNav
+  );
 
   return (
     <div
-    //   className={
-    //     showFilterMobileNav
-    //       ? "filter-section filter-section-display"
-    //       : "filter-section"
-    //   }
+      className={
+        showFilterMobileNav
+          ? "filter-section filter-section-display"
+          : "filter-section"
+      }
     >
       <div
         className="filter-section-close"
-        // onClick={() => setShowFilterMobileNav(false)}
+        onClick={() => dispatch(setShowFilterMobileNav(false))}
       >
         <i className="fas fa-times"></i>
       </div>
