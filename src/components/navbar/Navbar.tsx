@@ -1,13 +1,14 @@
 import "./navbar.css";
 import { useState } from "react";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logoutService } from "../../services";
 import { RootState, removeUserData, setShowFilterMobileNav } from "../../store";
 
 export const Navbar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [dispMobNav, setDispMobNav] = useState(false);
   const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
   const userData = useTypedSelector((state) => state.auth);
@@ -16,6 +17,7 @@ export const Navbar = () => {
     try {
       await logoutService();
       dispatch(removeUserData());
+      navigate("/");
     } catch (err) {
       console.error("Logout failed", err);
       //   toast for failure

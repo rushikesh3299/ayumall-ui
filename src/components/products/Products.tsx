@@ -1,25 +1,19 @@
 import "./products.css";
 import { Link } from "react-router-dom";
 import { getProducts } from "../../services";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { RootState, saveProducts } from "../../store";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
 export const Products = () => {
-  interface Product {
-    _id: string;
-    image: string;
-    title: string;
-    brand: string;
-    price: number;
-    weight: string;
-    // Add other fields if necessary
-  }
-
-  const [products, setProducts] = useState<Product[]>([]);
+  const dispatch = useDispatch();
+  const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const products = useTypedSelector((state) => state.product.products);
 
   const getAllProducts = async () => {
     try {
       const productRes = await getProducts();
-      setProducts(productRes);
+      dispatch(saveProducts(productRes));
     } catch (error) {
       console.error("Error fetching products:", error);
     }
