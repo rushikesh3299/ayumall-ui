@@ -1,7 +1,7 @@
 // import { useProduct } from "../../context/index";
 import "./filter.css";
-import { useDispatch, useSelector } from "react-redux";
-import { setShowFilterMobileNav } from "../../store";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import { RootState, setShowFilterMobileNav } from "../../store";
 
 export const Filter = () => {
   //   const {
@@ -9,9 +9,10 @@ export const Filter = () => {
   //     productDispatch,
   //     showFilterMobileNav,
   //     setShowFilterMobileNav,
-  //   } = useProduct();s
+  //   } = useProduct();
+  const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
   const dispatch = useDispatch();
-  const showFilterMobileNav = useSelector(
+  const showFilterMobileNav = useTypedSelector(
     (state) => state.utility.showFilterMobileNav
   );
 

@@ -1,15 +1,16 @@
 import "./navbar.css";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { logoutService } from "../../services";
-import { removeUserData, setShowFilterMobileNav } from "../../store";
+import { RootState, removeUserData, setShowFilterMobileNav } from "../../store";
 
 export const Navbar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [dispMobNav, setDispMobNav] = useState(false);
-  const userData = useSelector((state) => state.auth);
+  const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const userData = useTypedSelector((state) => state.auth);
 
   const logoutHandler = async () => {
     try {
@@ -39,7 +40,7 @@ export const Navbar = () => {
           <Link className="nav-link" to="/">
             Home
           </Link>
-          <Link className="nav-link" to="/products">
+          <Link className="nav-link" to="/product">
             Shop Now
           </Link>
         </div>
@@ -121,7 +122,7 @@ export const Navbar = () => {
             <Link to="/">Home</Link>
           </div>
           <div className="mobile-nav-menu">
-            <Link to="/products">Shop Now</Link>
+            <Link to="/product">Shop Now</Link>
           </div>
           <div className="mobile-nav-menu">
             <div>Orders</div>
