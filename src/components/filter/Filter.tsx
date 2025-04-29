@@ -1,20 +1,19 @@
 // import { useProduct } from "../../context/index";
 import "./filter.css";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
-import { RootState, setShowFilterMobileNav } from "../../store";
+import { RootState, setShowFilterMobileNav, modifyFilter } from "../../store";
 
 export const Filter = () => {
-  //   const {
-  //     productState,
-  //     productDispatch,
-  //     showFilterMobileNav,
-  //     setShowFilterMobileNav,
-  //   } = useProduct();
   const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
   const dispatch = useDispatch();
   const showFilterMobileNav = useTypedSelector(
     (state) => state.utility.showFilterMobileNav
   );
+  const sortBy = useTypedSelector((state) => state.product.filter.sortBy);
+  const categories = useTypedSelector(
+    (state) => state.product.filter.categories
+  );
+  const rating = useTypedSelector((state) => state.product.filter.rating);
 
   return (
     <div
@@ -34,7 +33,7 @@ export const Filter = () => {
         <span className="filter-title">Filter</span>
         <span
           className="filter-clear"
-          //   onClick={() => productDispatch({ type: "CLEAR_ALL" })}
+          onClick={() => dispatch(modifyFilter({ type: "CLEAR_ALL" }))}
         >
           Clear All
         </span>
@@ -47,10 +46,10 @@ export const Filter = () => {
               type="radio"
               className="sort"
               name="sort_by_price"
-              //   checked={productState.sortBy === "HIGH_TO_LOW" ? true : false}
-              //   onChange={() =>
-              //     productDispatch({ type: "SORT", payload: "HIGH_TO_LOW" })
-              //   }
+              checked={sortBy === "HIGH_TO_LOW" ? true : false}
+              onChange={() =>
+                dispatch(modifyFilter({ type: "SORT", sortBy: "HIGH_TO_LOW" }))
+              }
             />
             Price High to Low
           </label>
@@ -59,10 +58,10 @@ export const Filter = () => {
               type="radio"
               className="sort"
               name="sort_by_price"
-              //   checked={productState.sortBy === "LOW_TO_HIGH" ? true : false}
-              //   onChange={() =>
-              //     productDispatch({ type: "SORT", payload: "LOW_TO_HIGH" })
-              //   }
+              checked={sortBy === "LOW_TO_HIGH" ? true : false}
+              onChange={() =>
+                dispatch(modifyFilter({ type: "SORT", sortBy: "LOW_TO_HIGH" }))
+              }
             />
             Price Low to High
           </label>
@@ -76,10 +75,15 @@ export const Filter = () => {
               type="checkbox"
               name=""
               id=""
-              //   checked={productState.showCategory.includes("Rasayana")}
-              //   onChange={() =>
-              //     productDispatch({ type: "CATEGORIZE", payload: "Rasayana" })
-              //   }
+              checked={categories.includes("Rasayana")}
+              onChange={() => {
+                dispatch(
+                  modifyFilter({
+                    type: "CATEGORIZE",
+                    category: "Rasayana",
+                  })
+                );
+              }}
             />
             Rasayana
           </label>
@@ -88,10 +92,15 @@ export const Filter = () => {
               type="checkbox"
               name=""
               id=""
-              //   checked={productState.showCategory.includes("Avaleha")}
-              //   onChange={() =>
-              //     productDispatch({ type: "CATEGORIZE", payload: "Avaleha" })
-              //   }
+              checked={categories.includes("Avaleha")}
+              onChange={() => {
+                dispatch(
+                  modifyFilter({
+                    type: "CATEGORIZE",
+                    category: "Avaleha",
+                  })
+                );
+              }}
             />
             Avaleha
           </label>
@@ -100,10 +109,15 @@ export const Filter = () => {
               type="checkbox"
               name=""
               id=""
-              //   checked={productState.showCategory.includes("Churna")}
-              //   onChange={() =>
-              //     productDispatch({ type: "CATEGORIZE", payload: "Churna" })
-              //   }
+              checked={categories.includes("Churna")}
+              onChange={() => {
+                dispatch(
+                  modifyFilter({
+                    type: "CATEGORIZE",
+                    category: "Churna",
+                  })
+                );
+              }}
             />
             Churna
           </label>
@@ -112,10 +126,15 @@ export const Filter = () => {
               type="checkbox"
               name=""
               id=""
-              //   checked={productState.showCategory.includes("Vati")}
-              //   onChange={() =>
-              //     productDispatch({ type: "CATEGORIZE", payload: "Vati" })
-              //   }
+              checked={categories.includes("Vati")}
+              onChange={() => {
+                dispatch(
+                  modifyFilter({
+                    type: "CATEGORIZE",
+                    category: "Vati",
+                  })
+                );
+              }}
             />
             Vati
           </label>
@@ -130,10 +149,16 @@ export const Filter = () => {
               min="0"
               max="5"
               step="1"
-              //   value={productState.showRating}
-              //   onChange={(e) =>
-              //     productDispatch({ type: "RATE", payload: e.target.value })
-              //   }
+              value={rating}
+              onChange={(e) => {
+                console.log(e.target.value);
+                dispatch(
+                  modifyFilter({
+                    type: "RATE",
+                    rating: e.target.value,
+                  })
+                );
+              }}
             />
           </label>
         </div>
